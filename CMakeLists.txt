@@ -3,7 +3,7 @@ project(ThreadPool)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_library(ThreadPool SHARED src/library.cpp)
+add_library(ThreadPool SHARED src/ThreadPool.cpp)
 target_include_directories(ThreadPool PUBLIC
     ${CMAKE_SCMAKE_CURRENT_SOURCE_DIR}/include)
 

@@ -5,7 +5,7 @@
 #include  <gtest/gtest.h>
 
 #include "ThreadPoolTest.h"
-#include "../include/library.h"
+#include "../include/ThreadPool.h"
 
 
 TEST(ThreadPoolTest, ThreadPoolTest)
