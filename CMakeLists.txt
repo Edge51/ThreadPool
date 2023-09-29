@@ -21,7 +21,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 add_executable(ThreadPoolTest test/ThreadPoolTest.cpp test/ThreadPoolTest.h)
-target_link_libraries(ThreadPoolTest GTest::gtest_main)
+target_link_libraries(ThreadPoolTest ThreadPool GTest::gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(ThreadPoolTest)

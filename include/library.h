@@ -5,11 +5,10 @@
 #include <queue>
 #include <thread>
 
-void hello();
-
-class ThreadPool{
+class ThreadPool {
 public:
     explicit ThreadPool(int n);
+    std::string SayHello() const;
     
 private:
     std::vector<std::thread> threadPool;

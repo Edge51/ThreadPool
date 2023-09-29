@@ -9,3 +9,8 @@ void hello() {
 ThreadPool::ThreadPool(int n) {
 
 }
+
+std::string ThreadPool::SayHello() const
+{
+    return "hello";
+}

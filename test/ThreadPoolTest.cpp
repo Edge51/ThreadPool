@@ -5,10 +5,17 @@
 #include  <gtest/gtest.h>
 
 #include "ThreadPoolTest.h"
+#include "../include/library.h"
 
 
 TEST(ThreadPoolTest, ThreadPoolTest)
 {
     EXPECT_STRNE("hello", "world");
     EXPECT_EQ(7 * 6, 42);
+}
+
+TEST(ThreadPoolTest, SayHello)
+{
+    ThreadPool threadPool(1);
+    EXPECT_STREQ("hello", threadPool.SayHello().c_str());
 }
