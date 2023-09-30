@@ -8,14 +8,8 @@
 #include "../include/ThreadPool.h"
 
 
-TEST(ThreadPoolTest, ThreadPoolTest)
+TEST(ThreadPoolTest, Initialize)
 {
-    EXPECT_STRNE("hello", "world");
-    EXPECT_EQ(7 * 6, 42);
-}
-
-TEST(ThreadPoolTest, SayHello)
-{
-    ThreadPool threadPool(1);
-    EXPECT_STREQ("hello", threadPool.SayHello().c_str());
+    ThreadPool threadPool(10);
+    EXPECT_EQ(threadPool.Size(), 10);
 }
