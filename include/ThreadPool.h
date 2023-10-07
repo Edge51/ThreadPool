@@ -4,6 +4,7 @@
 #include <vector>
 #include <queue>
 #include <thread>
+#include <future>
 #include <condition_variable>
 #include <functional>
 
@@ -13,6 +14,9 @@ public:
     ThreadPool() = delete;
     explicit ThreadPool(int n);
     ~ThreadPool();
+    template<class F, class... Args>
+    auto EnQueue(F&& f, Args&&... args)
+        -> std::future<typename std::result_of<F(Args...)>::type>;
     size_t Size() const;
     
 private:

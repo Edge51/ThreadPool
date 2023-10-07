@@ -2,11 +2,6 @@
 
 #include <iostream>
 
-void hello()
-{
-    std::cout << "Hello, World!" << std::endl;
-}
-
 ThreadPool::ThreadPool(int n)
 {
     for (int i = 0; i < n; i++) {
@@ -39,6 +34,31 @@ ThreadPool::~ThreadPool()
     for (auto &worker : workers) {
         worker.join();
     }
+}
+
+template<class F, class... Args>
+auto ThreadPool::EnQueue(F&& f, Args&&... args)
+    -> std::future<typename std::result_of<F(Args...)>::type>
+{
+    using ReturnType = typename std::result_of<F(Args...)>::type;
+
+    auto task = std::make_shared<std::packaged_task<ReturnType()>>(
+        std::bind(std::forward(f), std::forward(args)...)
+    );
+
+    std::future<ReturnType> result = task.get_future();
+
+    {
+        std::unique_lock<std::mutex> lock(queueMutex);
+        if (!running) {
+            throw std::runtime_error("EnQueue when threadPool not running!");
+        }
+        tasks.emplace(task);
+    }
+
+    conditionVariable.notify_one();
+
+    return result;
 }
 
 size_t ThreadPool::Size() const
